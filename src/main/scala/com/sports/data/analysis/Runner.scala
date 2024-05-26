@@ -24,7 +24,7 @@ object Runner {
       printResults("Printing Game Score", gameScore)
 
       val playerDetails = showPlayerDetails(dataFrame)
-      printResults("Printing Player Details", playerDetails)
+      printResults("Printing Player Statistics", playerDetails)
     }
   }
 
