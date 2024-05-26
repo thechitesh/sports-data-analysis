@@ -1,6 +1,6 @@
 package com.sports.data.analysis
 
-import org.apache.spark.sql.types.{StringType, StructField, StructType}
+import org.apache.spark.sql.types.{StringType, StructField}
 import org.apache.spark.sql.{Encoders, Row, SparkSession}
 import org.scalatest.funsuite.AnyFunSuite
 
@@ -12,20 +12,20 @@ class GameAnalysisTest extends AnyFunSuite {
     .getOrCreate()
 
 
-  private val schema = StructType(Seq(
-    StructField("n_actionid", StringType, true),
+  private val schema =  (Seq(
+    StructField("n_actionid",    StringType, true),
     StructField("c_competition", StringType, true),
-    StructField("n_Matchid", StringType, true),
-    StructField("d_date", StringType, true),
-    StructField("c_Action", StringType, true),
-    StructField("c_Period", StringType, true),
-    StructField("n_TeamID", StringType, true),
-    StructField("c_Team", StringType, true),
-    StructField("n_personid", StringType, true),
-    StructField("c_person", StringType, true),
-    StructField("c_Function", StringType, true),
-    StructField("n_ShirtNr", StringType, true),
-    StructField("c_Subperson", StringType, true)
+    StructField("n_Matchid",     StringType, true),
+    StructField("d_date",        StringType, true),
+    StructField("c_Action",      StringType, true),
+    StructField("c_Period",      StringType, true),
+    StructField("n_TeamID",      StringType, true),
+    StructField("c_Team",        StringType, true),
+    StructField("n_personid",    StringType, true),
+    StructField("c_person",      StringType, true),
+    StructField("c_Function",    StringType, true),
+    StructField("n_ShirtNr",     StringType, true),
+    StructField("c_Subperson",   StringType, true)
   ))
 
   test("Show Match Details") {
