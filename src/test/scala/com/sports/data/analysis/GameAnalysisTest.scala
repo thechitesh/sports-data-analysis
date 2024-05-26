@@ -1,10 +1,11 @@
 package com.sports.data.analysis
 
-import org.apache.spark.sql.types.{StringType, StructField}
+import org.apache.spark.sql.types.{StringType, StructField, StructType}
 import org.apache.spark.sql.{Encoders, Row, SparkSession}
+import org.scalatest.BeforeAndAfterAll
 import org.scalatest.funsuite.AnyFunSuite
 
-class GameAnalysisTest extends AnyFunSuite {
+class GameAnalysisTest extends AnyFunSuite with BeforeAndAfterAll {
 
   private val sparkSession = SparkSession.builder()
     .appName("Game Analysis Test")
@@ -12,7 +13,7 @@ class GameAnalysisTest extends AnyFunSuite {
     .getOrCreate()
 
 
-  private val schema =  (Seq(
+  private val schema =  StructType(Seq(
     StructField("n_actionid",    StringType, true),
     StructField("c_competition", StringType, true),
     StructField("n_Matchid",     StringType, true),
@@ -28,8 +29,15 @@ class GameAnalysisTest extends AnyFunSuite {
     StructField("c_Subperson",   StringType, true)
   ))
 
+  override def beforeAll(): Unit = {
+    sparkSession.sparkContext.setLogLevel("ERROR")
+  }
+
+  override def afterAll() = {
+    sparkSession.stop()
+  }
+
   test("Show Match Details") {
-    println("hello")
     val testData = Seq(
       Row("22039489", "Test competition", "2174508", "11-Aug-2017 19:00", "Line-up", "NULL","16", "FC Utrecht", "924566", "Anouar Kali", "NULL", "1223164", "Sheraldo Becker"),
       Row("22039489", "Test competition", "2174508", "11-Aug-2017 19:00", "Line-up", "NULL","16", "ADO Den Haag", "664080", "Lex Immers", "NULL", "NULL", "NULL"),
@@ -41,7 +49,7 @@ class GameAnalysisTest extends AnyFunSuite {
     assert(result.size() == 2)
   }
 
-  test("show League Table ") {
+  test("Show League Table ") {
     val testData = Seq(
       Row("22039489", "Test competition", "2174508", "11-Aug-2017 19:00", "Goal", "NULL","16", "FC Utrecht", "924566", "Anouar Kali", "NULL", "1223164", "Sheraldo Becker"),
       Row("22049499", "Test competition", "2174508", "11-Aug-2017 19:00", "Goal", "NULL","16", "FC Utrecht", "924566", "Donny Gorter", "NULL", "1223164", "Sheraldo Becker"),
@@ -56,7 +64,7 @@ class GameAnalysisTest extends AnyFunSuite {
     assert(result.get(0).get(2) == 2)
   }
 
-  test("show Game Score ") {
+  test("Show Game Score ") {
     val testData = Seq(
       Row("22039489", "Test competition", "2174508", "11-Aug-2017 19:00", "Goal", "NULL","16", "FC Utrecht", "924566", "Anouar Kali", "NULL", "1223164", "Sheraldo Becker"),
       Row("22049499", "Test competition", "2174508", "11-Aug-2017 19:00", "Goal", "NULL","16", "FC Utrecht", "924566", "Donny Gorter", "NULL", "1223164", "Sheraldo Becker"),
@@ -72,7 +80,7 @@ class GameAnalysisTest extends AnyFunSuite {
   }
 
 
-  test("show Player Details ") {
+  test("Show Player Details ") {
     val testData = Seq(
       Row("22039489", "Test competition", "2174508", "11-Aug-2017 19:00", "Goal", "NULL","16", "FC Utrecht", "924566", "Anouar Kali", "NULL", "10", "Sheraldo Becker"),
       Row("22049499", "Test competition", "2174508", "11-Aug-2017 19:00", "Goal", "NULL","16", "FC Utrecht", "924566", "Anouar Kali", "NULL", "10", "Sheraldo Becker"),

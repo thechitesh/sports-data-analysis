@@ -25,9 +25,14 @@ There are following options to run the application
   1. First you have add a VM argument in Intellij Run configuration. This is needed as scala still uses jdk internal modules which are now restricted since jdk 9. 
     ![VM Options](/images/vm-options.png)
   2. Then, You can run the main method at `com.sports.data.analysis.Runner`
+  3. You will see the program output as follows
+  ![Program Output](/images/program-output.png)
 - #### With Command line Terminal 
   - Run the following commands in order
     1. `export JAVA_OPTS='--add-exports java.base/sun.nio.ch=ALL-UNNAMED'` 
-    2. `sbt test`
-    3. And you will see following test results in your terminal
+    2. To execute the test `sbt test`
+    3. The test result will be shown as follows
        ![Test Results](/images/test-results.png)
+    4. To see the program output, run the command `sbt run`
+    5. And you see the program output as follows
+    ![Program Output](/images/program-output.png)
