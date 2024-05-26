@@ -1,7 +1,7 @@
 package com.sports.data.analysis
 
 import org.apache.spark.sql.functions._
-import org.apache.spark.sql.{Column, DataFrame, SparkSession}
+import org.apache.spark.sql.{Column, DataFrame}
 
 object GameAnalysis {
 
@@ -77,5 +77,4 @@ object GameAnalysis {
       .alias("playerDetails")
     playerDetails.orderBy("ShirtNumber")
   }
-
 }
