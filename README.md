@@ -8,7 +8,7 @@ With this application we can analyse Sports Data given in a CSV format. And the 
 
 ## Technology
 The application is able to parse the CSV data with following Tech :
-- Java 17
+- JDK 17
 - Scala 2.13.14
 - Apache Spark 3.5.1
 
